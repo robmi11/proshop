@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import { LinkContainer } from "react-router-bootstrap";
+import Rating from "./Rating";
 
 const Product = ({ product }) => {
   return (
@@ -27,6 +28,12 @@ const Product = ({ product }) => {
             currency: "USD",
           }).format(product.price)}
         </Card.Text>
+        <Rating
+          text={`${product.numReviews} ${
+            product.numReviews === 1 ? "Review" : "Reviews"
+          }`}
+          value={product.rating}
+        />
       </Card.Body>
     </Card>
   );
