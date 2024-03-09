@@ -7,7 +7,7 @@ import "./bootstrap.custom.css";
 import "./index.css";
 import App from "./App";
 import Home from "./pages/Home";
-import ProductDetails from "./components/ProductDetails";
+import ProductDetails from "./pages/ProductDetails";
 
 const router = createBrowserRouter([
   {
