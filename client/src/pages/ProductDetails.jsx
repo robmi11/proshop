@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -7,12 +9,28 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 
 import Rating from "../components/Rating";
-import products from "../data/products";
 
 const ProductDetails = () => {
+  const [singleProduct, setSingleProduct] = useState({});
+  const [isError, setIsError] = useState(false);
   const { _id } = useParams();
 
-  const singleProduct = products.find((product) => product._id === _id);
+  useEffect(() => {
+    const fetchSingleProductById = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/${_id}`);
+        console.log(data);
+        setSingleProduct(data);
+        setIsError(false);
+      } catch (error) {
+        setIsError(true);
+      }
+    };
+    fetchSingleProductById();
+  }, [_id]);
+
+  if (isError) return <h1>Something went realy bad....</h1>;
+
   return (
     <>
       <Link
