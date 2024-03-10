@@ -1,11 +1,14 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import mongo from "./config/mongo.js";
 import products from "./data/products.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
+
 const app = express();
+mongo();
 
 app.use(cors());
 
