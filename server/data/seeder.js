@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import colors from "colors";
-import users from "./data/users.js";
-import products from "./data/products.js";
-import User from "./models/UserModel.js";
-import Product from "./models/ProductModel.js";
-import Order from "./models/OrderModel.js";
-import mongo from "./config/mongo.js";
+import users from "./users.js";
+import products from "./products.js";
+import User from "../models/UserModel.js";
+import Product from "../models/ProductModel.js";
+import Order from "../models/OrderModel.js";
+import mongo from "../config/mongo.js";
 
 dotenv.config();
 
