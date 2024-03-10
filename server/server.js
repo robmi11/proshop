@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongo from "./config/mongo.js";
 import products from "./data/products.js";
+import productRouter from "./routes/ProductRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -16,9 +18,7 @@ app.get("/", (req, res) => {
   res.send("Server is on");
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
+app.use("/api/products", productRouter);
 
 app.get("/api/products/:id", (req, res) => {
   const { id } = req.params;
@@ -30,6 +30,9 @@ app.get("/api/products/:id", (req, res) => {
     res.status(200).json(product);
   }
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () =>
   console.log(`Server is on and listens at port: ${PORT}`),
