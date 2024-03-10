@@ -2,9 +2,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+import store from "./app/store";
+import { Provider } from "react-redux";
+
 import "./bootstrap.custom.css";
 import "./index.css";
+
+import { LinkContainer } from "react-router-bootstrap";
 import App from "./App";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
@@ -38,6 +42,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
