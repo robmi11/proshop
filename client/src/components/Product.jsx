@@ -4,7 +4,6 @@ import { LinkContainer } from "react-router-bootstrap";
 import Rating from "./Rating";
 
 const Product = ({ product }) => {
-  // console.log(product[0]);
   return (
     <Card className="my-3 p3 rounded">
       <LinkContainer to={`/product/${product._id}`}>

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useGetProductByIdQuery } from "../slices/productsApiSlice";
 import { useParams, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -11,25 +10,16 @@ import Row from "react-bootstrap/Row";
 import Rating from "../components/Rating";
 
 const ProductDetails = () => {
-  const [singleProduct, setSingleProduct] = useState({});
-  const [isError, setIsError] = useState(false);
   const { _id } = useParams();
+  const {
+    data: singleProduct,
+    isLoading,
+    isError,
+    error,
+  } = useGetProductByIdQuery(_id);
 
-  useEffect(() => {
-    const fetchSingleProductById = async () => {
-      try {
-        const { data } = await axios.get(`/api/products/${_id}`);
-        console.log(data);
-        setSingleProduct(data);
-        setIsError(false);
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-    fetchSingleProductById();
-  }, [_id]);
-
-  if (isError) return <h1>Something went realy bad....</h1>;
+  if (isError) return <h1>{error?.data?.message || error.error}</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <>
