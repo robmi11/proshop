@@ -2,6 +2,7 @@ import { useGetAllProductsQuery } from "../slices/productsApiSlice";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Product from "../components/Product";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const {
@@ -19,7 +20,7 @@ const Home = () => {
       </>
     );
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loader />;
   return (
     <>
       <h1>Latest Products</h1>

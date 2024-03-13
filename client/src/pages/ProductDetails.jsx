@@ -8,6 +8,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 
 import Rating from "../components/Rating";
+import Loader from "../components/Loader";
 
 const ProductDetails = () => {
   const { _id } = useParams();
@@ -19,7 +20,7 @@ const ProductDetails = () => {
   } = useGetProductByIdQuery(_id);
 
   if (isError) return <h1>{error?.data?.message || error.error}</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loader />;
 
   return (
     <>
