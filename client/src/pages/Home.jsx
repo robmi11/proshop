@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Product from "../components/Product";
 import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const Home = () => {
   const {
@@ -14,10 +15,9 @@ const Home = () => {
 
   if (isError)
     return (
-      <>
-        <h1>Something went wrong!</h1>
-        <p>{error?.data?.message || error.error}</p>
-      </>
+      <Message variant="danger">
+        {error?.data?.message || error?.error || error}
+      </Message>
     );
 
   if (isLoading) return <Loader />;
