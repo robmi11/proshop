@@ -12,18 +12,19 @@ import { LinkContainer } from "react-router-bootstrap";
 import App from "./App";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: (
-      <>
+      <div className="container mx-auto">
         <h3>404 - page not found...</h3>
         <LinkContainer to="/">
           <Link>Back</Link>
         </LinkContainer>
-      </>
+      </div>
     ),
     children: [
       {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:_id",
         element: <ProductDetails />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
