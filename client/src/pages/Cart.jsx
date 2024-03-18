@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../slices/cart/cartSlice";
+import { updateItem, removeFromCart } from "../slices/cart/cartSlice";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -17,9 +17,13 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const addToCartHandler = (item, qty) => {
-    dispatch(addToCart({ ...item, qty }));
+  const updateItemQuantity = (_id, qty) => {
+    dispatch(updateItem({ _id, qty }));
     navigate("/cart");
+  };
+
+  const checkOutHandler = () => {
+    navigate("/login?redirect=/shipping");
   };
 
   return (
@@ -71,7 +75,10 @@ const Cart = () => {
                         as="select"
                         value={item.qty}
                         onChange={(event) =>
-                          addToCartHandler(item, Number(event.target.value))
+                          updateItemQuantity(
+                            item._id,
+                            Number(event.target.value),
+                          )
                         }>
                         {[...Array(item.countInStock).keys()].map((x) => (
                           <option
@@ -85,7 +92,8 @@ const Cart = () => {
                     <Col md={2}>
                       <Button
                         type="button"
-                        variant="ligh">
+                        variant="ligh"
+                        onClick={() => dispatch(removeFromCart(item._id))}>
                         <FaTrash color="black" />
                       </Button>
                     </Col>
@@ -112,7 +120,8 @@ const Cart = () => {
               <ListGroup.Item className="d-grid">
                 <Button
                   type="button"
-                  disabled={cartItems.length === 0}>
+                  disabled={cartItems.length === 0}
+                  onClick={() => checkOutHandler()}>
                   Proceed to checkout
                 </Button>
               </ListGroup.Item>
