@@ -1,6 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
-import bcrypt from "bcryptjs";
 import User from "../models/UserModel.js";
+import { genToken } from "../utils/genToken.js";
 
 /**
  * @description   Login user and get the token
@@ -13,6 +13,7 @@ export const loginUser = expressAsyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
+    genToken(res, user._id);
     res.status(200).json({ _id: user._id, name: user.name, email: user.email });
   } else {
     res.status(401);
@@ -36,6 +37,7 @@ export const registerUser = expressAsyncHandler(async (req, res) => {
  * @access        Private
  */
 export const logoutUser = expressAsyncHandler(async (req, res) => {
+  res.clearCookie("auth");
   res.status(200).json({ message: "User is logged out." });
 });
 
@@ -45,7 +47,9 @@ export const logoutUser = expressAsyncHandler(async (req, res) => {
  * @access        Private
  */
 export const getUserProfile = expressAsyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Get user profile" });
+  res
+    .status(200)
+    .json({ _id: req.user._id, name: req.user.name, email: req.user.email });
 });
 
 /**
