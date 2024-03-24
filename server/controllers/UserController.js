@@ -1,4 +1,5 @@
 import expressAsyncHandler from "express-async-handler";
+import bcrypt from "bcryptjs";
 import User from "../models/UserModel.js";
 
 /**
@@ -7,8 +8,16 @@ import User from "../models/UserModel.js";
  * @param -       User e-mail and password
  * @access        Public
  */
-export const authUser = expressAsyncHandler(async (req, res) => {
-  res.status(200).json({ message: "User is authenticated." });
+export const loginUser = expressAsyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    res.status(200).json({ _id: user._id, name: user.name, email: user.email });
+  } else {
+    res.status(401);
+    throw new Error("Invalid e-mail address and / or password!");
+  }
 });
 
 /**

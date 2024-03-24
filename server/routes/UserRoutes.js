@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  authUser,
+  loginUser,
   deleteUser,
   getAllUsersProfile,
   getUserProfile,
@@ -21,6 +21,6 @@ router
   .get(getUsersProfileById)
   .put(updateUserByAdmin);
 router.post("/logout", logoutUser);
-router.post("/login", authUser);
+router.post("/login", loginUser);
 
 export default router;

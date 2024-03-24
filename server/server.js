@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import mongo from "./config/mongo.js";
 import products from "./data/products.js";
 import productRouter from "./routes/ProductRoutes.js";
@@ -13,7 +14,10 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 mongo();
 
+app.use(cookieParser());
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Server is on");
