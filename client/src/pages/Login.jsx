@@ -32,6 +32,7 @@ const Login = () => {
   }, [userInfo, redirect, navigate]);
 
   const submitHandler = async (event) => {
+    event.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
@@ -39,8 +40,6 @@ const Login = () => {
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-
-    event.preventDefault();
   };
 
   return (
