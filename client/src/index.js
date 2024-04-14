@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
 import Register from "./pages/Register";
 import Shipping from "./pages/Shipping";
 
@@ -52,8 +53,14 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/shipping",
-        element: <Shipping />,
+        path: "",
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/shipping",
+            element: <Shipping />,
+          },
+        ],
       },
     ],
   },
