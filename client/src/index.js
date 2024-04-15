@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
+import Payment from "./pages/Payment";
 import PrivateRoute from "./components/PrivateRoute";
 import Register from "./pages/Register";
 import Shipping from "./pages/Shipping";
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
           {
             path: "/shipping",
             element: <Shipping />,
+          },
+          {
+            path: "/payment",
+            element: <Payment />,
           },
         ],
       },
