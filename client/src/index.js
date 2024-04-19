@@ -15,6 +15,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
+import PlaceOrder from "./pages/PlaceOrder";
 import PrivateRoute from "./components/PrivateRoute";
 import Register from "./pages/Register";
 import Shipping from "./pages/Shipping";
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
           {
             path: "/payment",
             element: <Payment />,
+          },
+          {
+            path: "/placeorder",
+            element: <PlaceOrder />,
           },
         ],
       },

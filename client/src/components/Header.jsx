@@ -20,7 +20,6 @@ const Header = () => {
   const [logout] = useUserLogoutMutation();
 
   const logoutHandler = async () => {
-    console.log("logout");
     try {
       await logout().unwrap();
       dispatch(clearCredentials());
